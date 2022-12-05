@@ -23,10 +23,20 @@ function App() {
   },[]);
 
   if(error){
-    return <div className='main-container'><Error error={error.message}/></div>
+    return <div className='container'><Error error={error.message}/></div>
   }
-  else if (!isLoaded) return <div className='main-container'><Loading/></div>
-  else return <div className='main-container'><Jokes jokes={items}/></div>
+  else if (!isLoaded) return <div className='container'><Loading/></div>
+  else return (
+    <div className='container'>
+
+      <h1>Programming jokes 🤣</h1>
+
+      <div className='main-container'>
+        <Jokes jokes={items}/>
+      </div>
+      
+    </div>
+  )
 }
 
 export default App;

@@ -1,0 +1,28 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'roboto';
+}
+
+body{
+    background-color: #ddd;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+    border-radius: 5px;
+    width: min(95%, 70rem);
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.main-container{
+    margin-top: 3rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3,1fr);
+}
