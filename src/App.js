@@ -35,6 +35,9 @@ function App() {
         <Jokes jokes={items}/>
       </div>
       
+      <div>
+        <button onClick={() => window.location.reload()}>Random Jokes</button>
+      </div>
     </div>
   )
 }

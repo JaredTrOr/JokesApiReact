@@ -1,22 +1,13 @@
 import './styles/Joke.css';
 
 export default function Joke({joke}){
-
-    if(joke.type === 'single'){
-        return(
-            <div className="joke-container">
-                <div className='type'>Type: Single type joke</div>
-                <div>Joke: {joke.joke}</div>
-            </div>
-        ); 
-    }
-    else{
-        return(
-            <div className="joke-container">
-                <div className='type'>Type: Two part joke</div>
-                <div>Set up: {joke.setup}</div>
-                <div>Delivery: {joke.delivery}</div>
-            </div>
-        )
-    }
+    const type = joke.type === 'single' ? true : false;
+    return(
+        <div className="joke-container">
+            <div className='type'>Type: {joke.type}</div>
+            {type && <div>Joke: {joke.joke}</div>}
+            {!type && <div>{joke.setup}</div>}
+            {!type && <div>{joke.delivery}</div>}
+        </div>
+    ); 
 }

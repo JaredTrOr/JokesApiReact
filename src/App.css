@@ -12,6 +12,7 @@ body{
 .container{
     display: flex;
     flex-direction: column;
+    gap: 3rem;
 
     background-color: white;
     border-radius: 5px;
@@ -21,8 +22,26 @@ body{
 }
 
 .main-container{
-    margin-top: 3rem;
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: repeat(3,1fr);
 }
+
+button{
+    border-radius: 5px;
+    background-color: rgb(45, 130, 220);
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgb(33, 92, 154);
+}
+
+@media(min-width: 50em){
+    .main-container{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
