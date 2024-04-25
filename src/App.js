@@ -1,5 +1,5 @@
 import './App.css';
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Error from './components/Error';
 import Loading from './components/Loading'
 import Jokes from './components/Jokes';
@@ -12,32 +12,48 @@ function App() {
 
   useEffect(() => {
     fetch('https://v2.jokeapi.dev/joke/Programming?amount=6')
-    .then(res => res.json())
-    .then(result => {
-      setIsLoaded(true);
-      setItems(result.jokes);
-    }, error => {
-      setIsLoaded(true);
-      setError(error);
-    });
-  },[]);
+      .then(res => res.json())
+      .then(result => {
+        setIsLoaded(true);
+        setItems(result.jokes);
+      }, error => {
+        setIsLoaded(true);
+        setError(error);
+      });
+  }, []);
 
-  if(error){
-    return <div className='container'><Error error={error.message}/></div>
+  const loadNewJokes = async () => {
+    setIsLoaded(false);
+    const res = await fetch('https://v2.jokeapi.dev/joke/Programming?amount=6')
+    const data = await res.json();
+
+    if (data.error) setError(data.error)
+    else {
+      setItems(data.jokes);
+      setIsLoaded(true);
+    }
   }
-  else if (!isLoaded) return <div className='container'><Loading/></div>
+
+  if (error) {
+    return <div className='container'><Error error={error.message} /></div>
+  }
   else return (
     <div className='container'>
 
       <h1>Programming jokes 🤣</h1>
 
-      <div className='main-container'>
-        <Jokes jokes={items}/>
-      </div>
-      
-      <div>
-        <button onClick={() => window.location.reload()}>Random Jokes</button>
-      </div>
+      {!isLoaded && <div className='container'><Loading /></div>}
+
+      {isLoaded &&
+        <div className='main-container'>
+          <Jokes jokes={items} />
+          <div>
+            <button onClick={loadNewJokes}>Random Jokes</button>
+          </div>
+        </div>
+      }
+
+
     </div>
   )
 }
